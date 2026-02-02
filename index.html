@@ -1,26 +1,83 @@
 <div class="image-gallery">
-  <img src="image/app_icon.png" alt="App Icon">
-  <img src="image/result_bard.png" alt="Result Bard">
-  <img src="image/splash.png" alt="Splash">
-  <img src="image/thumb_color.png" alt="Thumb Color">
-  <img src="image/thumb_hidden_char.png" alt="Thumb Hidden Char">
-  <img src="image/thumb_job.png" alt="Thumb Job">
-  <img src="image/thumb_psycho.png" alt="Thumb Psycho">
-  <img src="image/thumb_road.png" alt="Thumb Road">
-  <img src="image/thumb_rpg.png" alt="Thumb RPG">
-  <img src="image/thumb_stress.png" alt="Thumb Stress">
+  <figure>
+    <img src="image/app_icon.png" alt="App Icon">
+    <figcaption>app_icon.png</figcaption>
+  </figure>
+  
+  <figure>
+    <img src="image/result_bard.png" alt="Result Bard">
+    <figcaption>result_bard.png</figcaption>
+  </figure>
+  
+  <figure>
+    <img src="image/splash.png" alt="Splash">
+    <figcaption>splash.png</figcaption>
+  </figure>
+  
+  <figure>
+    <img src="image/thumb_color.png" alt="Thumb Color">
+    <figcaption>thumb_color.png</figcaption>
+  </figure>
+  
+  <figure>
+    <img src="image/thumb_hidden_char.png" alt="Thumb Hidden Char">
+    <figcaption>thumb_hidden_char.png</figcaption>
+  </figure>
+  
+  <figure>
+    <img src="image/thumb_job.png" alt="Thumb Job">
+    <figcaption>thumb_job.png</figcaption>
+  </figure>
+  
+  <figure>
+    <img src="image/thumb_psycho.png" alt="Thumb Psycho">
+    <figcaption>thumb_psycho.png</figcaption>
+  </figure>
+  
+  <figure>
+    <img src="image/thumb_road.png" alt="Thumb Road">
+    <figcaption>thumb_road.png</figcaption>
+  </figure>
+  
+  <figure>
+    <img src="image/thumb_rpg.png" alt="Thumb RPG">
+    <figcaption>thumb_rpg.png</figcaption>
+  </figure>
+  
+  <figure>
+    <img src="image/thumb_stress.png" alt="Thumb Stress">
+    <figcaption>thumb_stress.png</figcaption>
+  </figure>
 </div>
 
 <style>
   .image-gallery {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px; /* 画像同士の隙間 */
+    gap: 20px; /* 全体の間隔を少し広げました */
   }
+
+  /* 画像と文字を囲むボックスの設定 */
+  .image-gallery figure {
+    margin: 0;
+    width: 200px; /* 画像のサイズに合わせる */
+    text-align: center; /* 文字を中央寄せ */
+  }
+
   .image-gallery img {
-    width: 200px; /* 画像の横幅（お好みで調整してください） */
+    width: 100%; /* 親要素(figure)の幅いっぱいに表示 */
     height: auto;
-    border-radius: 8px; /* 角を少し丸くする */
+    border-radius: 8px;
     border: 1px solid #ccc;
+    display: block;
+    margin-bottom: 8px; /* 画像と文字の間の隙間 */
+  }
+
+  /* ファイル名のテキストスタイル */
+  .image-gallery figcaption {
+    font-size: 12px;
+    color: #555;
+    word-break: break-all; /* 長いファイル名で崩れないように改行 */
+    font-family: monospace; /* プログラムっぽく等幅フォントに */
   }
 </style>
