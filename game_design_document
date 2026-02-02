@@ -1,0 +1,101 @@
+<article class="doc-container">
+  <header>
+    <h1>『Altmirror』IP設計・世界観定義書 (Ver. 1.0)</h1>
+  </header>
+
+  <section>
+    <h2>1. プロジェクト概要</h2>
+    <ul>
+      <li><strong>IP名称:</strong> Altmirror（オルトミラー）</li>
+      <li><strong>コンセプト:</strong> 「鏡の向こう側にある、もう一つの人生（運命）」</li>
+      <li><strong>ターゲット:</strong> 10代〜30代の女性、2次元ファン、推し活層、腐女子層</li>
+      <li><strong>ジャンル:</strong> 深層心理診断 × 異世界ファンタジーIP</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>2. 世界観設定 (The Two Worlds)</h2>
+    <p>本作は、全く異なる2つの世界が「鏡」を通じて表裏一体となっている世界観です。</p>
+    
+    <h3>【Real: 現代世界】</h3>
+    <p>舞台：20世紀（現在）の都会。</p>
+    <p>状況：12人の男たちは、アンティークショップの店員、医者、学生など、それぞれの「表の顔」を持って平穏に暮らしている。</p>
+
+    <h3>【Another: 鏡像異世界】</h3>
+    <p>舞台：剣と魔法、そして異形がうごめくゴシックファンタジー世界。</p>
+    <p>状況：現代人の「心の歪み」が限界に達したとき、この世界に影響を及ぼす。12人はそれぞれの「裏の職能（ジョブ）」を解放し、世界の均衡を保つために戦う。</p>
+  </section>
+
+  <section>
+    <h2>3. キャラクター構成 (12 Gentlemen)</h2>
+    <p>12名は全員が主人公であり、ユーザーの導き手です。3つのグループに分かれつつも、個々の深い因縁を持ちます。</p>
+    
+    <table class="doc-table">
+      <thead>
+        <tr>
+          <th>グループ</th>
+          <th>担当役割（裏稼業）</th>
+          <th>現代の職業（例）</th>
+          <th>性格・口調</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Order (光)</td>
+          <td>聖人、医者、英雄、聖職者</td>
+          <td>慈善家、外科医、警官、司書</td>
+          <td>秩序、献身、規律、敬語</td>
+        </tr>
+        <tr>
+          <td>Chaos (影)</td>
+          <td>スパイ、リーダー、掃除屋、フィクサー</td>
+          <td>バーテンダー、モデル、清掃員、投資家</td>
+          <td>策略、危険、毒舌、タメ口</td>
+        </tr>
+        <tr>
+          <td>Flow (中立)</td>
+          <td>芸術家、旅人、賢者、カラーマスター</td>
+          <td>画家、フリーター、学生、調香師</td>
+          <td>自由、感性、純粋、ミステリアス</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>4. ビジュアル・意匠 (Visual Identity)</h2>
+    <ul>
+      <li><strong>ベーススタイル:</strong> フラットデザイン × ベクターアート。</li>
+      <li><strong>融合要素:</strong> シンプルなモダンデザインに、鏡の装飾、幾何学的な紋章、ゴシック調のタイポグラフィを組み合わせる。</li>
+      <li><strong>メインカラー:</strong> ミッドナイトネイビー × シャンパンゴールド（知性と高級感）。</li>
+      <li><strong>キーモチーフ:</strong> 両面鏡、鍵、懐中時計。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>5. 今後の展開 (IP Strategy)</h2>
+    <ul>
+      <li><strong>アプリ:</strong> 診断結果に応じたキャラクターの二面性（現代/異世界）の露出。</li>
+      <li><strong>物販:</strong> アクスタ、缶バッジ、香水、ボイスドラマ、書き下ろし小説。</li>
+      <li><strong>体験:</strong> ユーザー自身が「自分の鏡像（異世界での適正）」を見つけ出す没入体験。</li>
+    </ul>
+  </section>
+</article>
+
+<style>
+  .doc-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  }
+  .doc-container h1 { border-bottom: 2px solid #1a2a44; color: #1a2a44; }
+  .doc-container h2 { background: #1a2a44; color: #fff; padding: 5px 10px; margin-top: 30px; }
+  .doc-container h3 { border-left: 5px solid #d4af37; padding-left: 10px; margin-top: 20px; }
+  .doc-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+  .doc-table th, .doc-table td { border: 1px solid #ccc; padding: 8px; text-align: left; font-size: 14px; }
+  .doc-table th { background-color: #eee; }
+</style>
