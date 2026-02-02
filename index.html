@@ -1,1 +1,26 @@
-test
+<div class="image-gallery">
+  <img src="image/app_icon.png" alt="App Icon">
+  <img src="image/result_bard.png" alt="Result Bard">
+  <img src="image/splash.png" alt="Splash">
+  <img src="image/thumb_color.png" alt="Thumb Color">
+  <img src="image/thumb_hidden_char.png" alt="Thumb Hidden Char">
+  <img src="image/thumb_job.png" alt="Thumb Job">
+  <img src="image/thumb_psycho.png" alt="Thumb Psycho">
+  <img src="image/thumb_road.png" alt="Thumb Road">
+  <img src="image/thumb_rpg.png" alt="Thumb RPG">
+  <img src="image/thumb_stress.png" alt="Thumb Stress">
+</div>
+
+<style>
+  .image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* 画像同士の隙間 */
+  }
+  .image-gallery img {
+    width: 200px; /* 画像の横幅（お好みで調整してください） */
+    height: auto;
+    border-radius: 8px; /* 角を少し丸くする */
+    border: 1px solid #ccc;
+  }
+</style>
