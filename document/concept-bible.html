@@ -177,78 +177,119 @@
 </head>
 <body>
 
-<input type="checkbox" id="menu-toggle">
+    <input type="checkbox" id="menu-toggle">
     <label for="menu-toggle" class="hamburger">
         <span></span><span></span><span></span>
     </label>
 
     <nav class="sidebar">
         <ul class="sidebar-menu">
-            <li class="menu-category">Main Bible</li>
-            <li><a href="../index.html">TOP / Portal</a></li>
+            <li class="menu-category">Concept</li>
+            <li><a href="index.html">TOP / Portal</a></li>
             <li><a href="concept-bible.html" style="color:var(--accent-gold)">IP Master Bible</a></li>
-            <li><a href="world-bible.html">Setting Bible</a></li>
-            <li><a href="glossary.html">Terminology</a></li>
-            <li><a href="../characters/characters.html">Character Matrix</a></li>
-            <li><a href="relationships.html">Relationships</a></li>
-            <li><a href="uiux-design.html">UI/UX Design</a></li>
             
-            <li class="menu-category">Order</li>
-            <li><a href="../characters/doctor.html">医者 / 嵯峨野 匠</a></li>
-            <li><a href="../characters/saint.html">聖人 / 十条 祈</a></li>
-            <li><a href="../characters/hero.html">英雄 / 烈火 凱</a></li>
-            <li><a href="../characters/cleric.html">聖職者 / 観月 零</a></li>
+            <li class="menu-category">Order (光)</li>
+            <li><a href="doctor.html">医者 / 嵯峨野 匠</a></li>
+            <li><a href="saint.html">聖人 / 十条 祈</a></li>
+            <li><a href="hero.html">英雄 / 烈火 凱</a></li>
+            <li><a href="cleric.html">聖職者 / 観月 零</a></li>
 
-            <li class="menu-category">Chaos</li>
-            <li><a href="../characters/cleaner.html">掃除屋 / 狛井 蓮</a></li>
-            <li><a href="../characters/cult.html">教祖 / 御堂 巳織</a></li>
-            </ul>
+            <li class="menu-category">Chaos (影)</li>
+            <li><a href="cleaner.html">掃除屋 / 狛井 蓮</a></li>
+            <li><a href="cult.html">カルトリーダー / 御堂 巳織</a></li>
+            <li><a href="spy.html">スパイ / 影山 密</a></li>
+            <li><a href="fixer.html">フィクサー / 霧島 凱弦</a></li>
+
+            <li class="menu-category">Flow (中立)</li>
+            <li><a href="color.html">カラーマスター / 染谷 映</a></li>
+            <li><a href="art.html">芸術家 / 浅葱 柩</a></li>
+            <li><a href="sage.html">賢者 / 宇佐見 律</a></li>
+            <li><a href="road.html">旅人 / 凪原 奏多</a></li>
+        </ul>
     </nav>
 
     <div class="main-content">
-        <header class="page-header">
-            <h1>IP Master Bible</h1>
-            <p style="color: #888; letter-spacing: 0.3em;">プロジェクト設計指針</p>
+        <header class="bible-header">
+            <span>Altmirror Ver. 1.0</span>
+            <h1>IP設計・世界観定義書</h1>
         </header>
 
-        <section>
+        <section id="project-overview">
             <h2>1. プロジェクト概要</h2>
-            <div class="content-box">
-                <div class="info-grid">
-                    <div class="info-label">タイトル</div><div>Altmirror（オルトミラー）</div>
-                    <div class="info-label">コピー</div><div class="highlight">「鏡を覗けば、嘘が剥がれる。」</div>
-                    <div class="info-label">ジャンル</div><div>深層心理診断 × ダークファンタジーADV</div>
-                    <div class="info-label">ターゲット</div><div>20〜30代の女性層、推し活・腐女子層、心理テスト・占い愛好家</div>
+            <div class="info-grid">
+                <div class="label">IP名称</div><div>Altmirror（オルトミラー）</div>
+                <div class="label">コンセプト</div><div>「鏡の向こう側にある、もう一つの人生（運命）」</div>
+                <div class="label">ターゲット</div><div>10代〜30代の女性、2次元ファン、推し活層、腐女子層</div>
+                <div class="label">ジャンル</div><div>深層心理診断 × 異世界ファンタジーIP</div>
+            </div>
+        </section>
+
+        <section id="world-setting">
+            <h2>2. 世界観設定 (The Two Worlds)</h2>
+            <p>本作は、全く異なる2つの世界が「鏡」を通じて表裏一体となっている世界観です。</p>
+            
+            <div class="world-box">
+                <div class="world-card">
+                    <h4>【Real: 現代世界】</h4>
+                    <p>舞台：20世紀（現在）の都会。</p>
+                    <p>12人の男たちは、アンティークショップの店員、医者、学生など、それぞれの「表の顔」を持って平穏に暮らしている。</p>
+                </div>
+                <div class="world-card">
+                    <h4>【Another: 鏡像異世界】</h4>
+                    <p>舞台：剣と魔法、ゴシックファンタジー世界。</p>
+                    <p>現代人の「心の歪み」が限界に達したとき、この世界に影響を及ぼす。12人は「裏の職能（ジョブ）」を解放し、世界の均衡を保つために戦う。</p>
                 </div>
             </div>
         </section>
 
-        <section>
-            <h2>2. コンセプトの詳細</h2>
-            <div class="content-box">
-                <p>
-                    本作は、現代的なサスペンス感を持つ<span class="highlight">『Altmirror：裏返しの運命（プロファイル）』</span>を主軸に展開します。
-                </p>
-                <p>
-                    ユーザーは<span class="highlight">「鏡子（キョウコ）」</span>として、鏡の回廊に並ぶ12人の<span class="highlight">「使徒（アポストル）」</span>の問いに答えていきます。
-                    診断を通じてキャラクターの隠された本性、すなわち<span class="highlight">「反転（リバース）」</span>を目撃しながら、自身の深層心理を紐解いていく没入型体験を提供します。
-                </p>
-            </div>
+        <section id="character-structure">
+            <h2>3. キャラクター構成 (12 Gentlemen)</h2>
+            <p>12名は全員が主人公であり、ユーザーの導き手です。3つのグループに分かれつつも、個々の深い因縁を持ちます。</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>グループ</th>
+                        <th>担当役割（裏稼業）</th>
+                        <th>現代の職業（例）</th>
+                        <th>性格・口調</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="color:#ffcc00;">Order (光)</td>
+                        <td>聖人、医者、英雄、聖職者</td>
+                        <td>慈善家、外科医、警官、司書</td>
+                        <td>秩序、献身、規律、敬語</td>
+                    </tr>
+                    <tr>
+                        <td style="color:#ff66ff;">Chaos (影)</td>
+                        <td>教祖、掃除屋、スパイ、フィクサー</td>
+                        <td>トップモデル、清掃員、バーテンダー、投資家</td>
+                        <td>支配、本能、策略、俺様・粗野</td>
+                    </tr>
+                    <tr>
+                        <td style="color:#66ccff;">Flow (中立)</td>
+                        <td>カラーマスター、芸術家、賢者、旅人</td>
+                        <td>調香師、画家、大学生、フリーター</td>
+                        <td>中立、芸術、知、飄々・マイペース</td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
 
-        <section>
-            <h2>3. 制作の狙い</h2>
-            <div class="content-box">
-                <p>
-                    「自己探求」という普遍的な関心事（心理テスト）を、耽美なキャラクターとダークファンタジーの世界観で包むことで、
-                    単なるゲームに留まらない「自分を見つめ直すツール」としてのIPを確立します。
-                </p>
-            </div>
+        <section id="core-system">
+            <h2>4. コアシステム（反転：リバース）</h2>
+            <h3>鏡の問いかけ</h3>
+            <p>ユーザー（鏡子）が診断テストを受ける際、キャラクターたちが鏡の中から語りかけます。「表の顔」で見せる優しさと、「裏の顔」で突きつける真実のギャップが、本作最大の魅力です。</p>
+            
+            <h3>深層心理との連動</h3>
+            <p>診断結果により、ユーザーがどのグループ（Order, Chaos, Flow）に属するか、どのキャラクターが「運命のパートナー」かが決定されます。</p>
         </section>
     </div>
 
     <footer>
-        &copy; 2024 Altmirror Project / IP Master Bible
+        &copy; 2024 Altmirror Project / World Building Document
     </footer>
 
 </body>
