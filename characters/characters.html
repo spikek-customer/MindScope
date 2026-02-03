@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>キャラクター属性一覧 | Altmirror 公式IPマスターガイド</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Serif+JP:wght@300;600&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #050505;
+            --panel-dark: #121212;
+            --accent-gold: #d4af37;
+            --accent-blue: #1e3a5f;
+            --order-color: #2c5d63; /* 秩序の深緑/青 */
+            --chaos-color: #632c2c; /* 混沌の赤 */
+            --flow-color: #5d632c;  /* 浮遊の黄/緑 */
+            --text-main: #e0e0e0;
+            --sidebar-width: 280px;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* --- ハンバーガーメニュー (共通) --- */
+        #menu-toggle { display: none; }
+        .hamburger {
+            position: fixed; top: 20px; left: 20px; z-index: 1000;
+            cursor: pointer; background: rgba(0,0,0,0.8);
+            padding: 10px; border: 1px solid var(--accent-gold);
+            border-radius: 5px; transition: 0.3s;
+        }
+        .hamburger span {
+            display: block; width: 25px; height: 2px;
+            background: var(--accent-gold); margin: 5px 0; transition: 0.3s;
+        }
+        .sidebar {
+            position: fixed; top: 0; left: calc(-1 * var(--sidebar-width));
+            width: var(--sidebar-width); height: 100%;
+            background: var(--panel-dark); border-right: 1px solid var(--accent-gold);
+            z-index: 999; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding-top: 80px; overflow-y: auto;
+        }
+        #menu-toggle:checked ~ .sidebar { left: 0; }
+        #menu-toggle:checked ~ .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        #menu-toggle:checked ~ .hamburger span:nth-child(2) { opacity: 0; }
+        #menu-toggle:checked ~ .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .sidebar-menu { list-style: none; padding: 0; margin: 0; }
+        .menu-category {
+            padding: 15px 25px 5px; font-size: 0.8rem; color: var(--accent-gold);
+            text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .sidebar-menu li a {
+            display: block; padding: 12px 25px; color: #bbb; text-decoration: none;
+            transition: 0.3s; font-size: 0.95rem;
+        }
+        .sidebar-menu li a:hover { background: var(--accent-blue); color: #fff; padding-left: 35px; }
+
+        /* --- メインコンテンツ --- */
+        .main-content {
+            padding: 100px 20px 60px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            border-bottom: 2px double var(--accent-gold);
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+        }
+
+        .page-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+            margin: 0;
+        }
+
+        /* --- 勢力別セクション --- */
+        .faction-section {
+            margin-bottom: 60px;
+        }
+
+        .faction-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .faction-order { color: #a0d8ef; }
+        .faction-chaos { color: #efa0a0; }
+        .faction-flow { color: #d8efa0; }
+
+        .char-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .char-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 20px;
+            border-radius: 4px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .char-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+        }
+
+        .char-role {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-gold);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .char-name-main {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.25rem;
+            color: #fff;
+            display: block;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+
+        .char-attribute {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .attr-label {
+            color: #888;
+            font-size: 0.8rem;
+            margin-right: 8px;
+        }
+
+        .tag-pill {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--accent-gold);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* 勢力別アクセント */
+        .border-order { border-left: 4px solid var(--order-color); }
+        .border-chaos { border-left: 4px solid var(--chaos-color); }
+        .border-flow { border-left: 4px solid var(--flow-color); }
+    </style>
+</head>
+<body>
+
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="hamburger">
+        <span></span><span></span><span></span>
+    </label>
+
+    <nav class="sidebar">
+        <ul class="sidebar-menu">
+            <li class="menu-category">Concept</li>
+            <li><a href="index.html">TOP / Portal</a></li>
+            <li><a href="concept-bible.html">IP Master Bible</a></li>
+            <li><a href="world-bible.html">Setting Bible</a></li>
+            <li><a href="glossary.html">Terminology</a></li>
+            <li><a href="characters.html" style="color:var(--accent-gold)">Characters (属性一覧)</a></li>
+            
+            <li class="menu-category">Order (秩序)</li>
+            <li><a href="doctor.html">医者 / 嵯峨野 匠</a></li>
+            <li><a href="saint.html">聖人 / 十条 祈</a></li>
+            <li><a href="hero.html">英雄 / 烈火 凱</a></li>
+            <li><a href="cleric.html">聖職者 / 観月 零</a></li>
+
+            <li class="menu-category">Chaos (混沌)</li>
+            <li><a href="cleaner.html">掃除屋 / 狛井 蓮</a></li>
+            <li><a href="cult.html">教祖 / 御堂 巳織</a></li>
+            <li><a href="spy.html">スパイ / 影山 密</a></li>
+            <li><a href="fixer.html">フィクサー / 霧島 凱弦</a></li>
+
+            <li class="menu-category">Flow (浮遊)</li>
+            <li><a href="road.html">旅人 / 凪原 奏多</a></li>
+            <li><a href="sage.html">賢者 / 宇佐見 律</a></li>
+            <li><a href="color.html">カラーマスター / 染谷 映</a></li>
+            <li><a href="art.html">芸術家 / 浅葱 柩</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <header class="page-header">
+            <h1>12 Gentlemen Attributes</h1>
+            <p style="font-family: 'Noto Serif JP', serif; color: #888;">12名の全キャラクター属性マトリクス</p>
+        </header>
+
+        <section class="faction-section">
+            <h2 class="faction-title faction-order">Order <span style="font-size: 1rem; opacity: 0.7;">- 秩序の天秤 -</span></h2>
+            <div class="char-grid">
+                <div class="char-card border-order">
+                    <span class="char-role">Order 01</span>
+                    <span class="char-name-main">医者 / 嵯峨野 匠</span>
+                    <div class="char-attribute"><span class="attr-label">領域:</span>理性の治療</div>
+                    <span class="tag-pill">エリート医師 ⇄ 魂の外科医</span>
+                </div>
+                <div class="char-card border-order">
+                    <span class="char-role">Order 02</span>
+                    <span class="char-name-main">聖人 / 十条 祈</span>
+                    <div class="char-attribute"><span class="attr-label">領域:</span>感情の救済</div>
+                    <span class="tag-pill">慈善家 ⇄ 救済の所有者</span>
+                </div>
+                <div class="char-card border-order">
+                    <span class="char-role">Order 03</span>
+                    <span class="char-name-main">英雄 / 烈火 凱</span>
+                    <div class="char-attribute"><span class="attr-label">領域:</span>正義の遂行</div>
+                    <span class="tag-pill">熱血刑事 ⇄ 孤高の戦士</span>
+                </div>
+                <div class="char-card border-order">
+                    <span class="char-role">Order 04</span>
+                    <span class="char-name-main">聖職者 / 観月 零</span>
+                    <div class="char-attribute"><span class="attr-label">領域:</span>宿命の記録</div>
+                    <span class="tag-pill">静かな司書 ⇄ 運命の執行人</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="faction-section">
+            <h2 class="faction-title faction-chaos">Chaos <span style="font-size: 1rem; opacity: 0.7;">- 混沌の奔流 -</span></h2>
+            <div class="char-grid">
+                <div class="char-card border-chaos">
+                    <span class="char-role">Chaos 01</span>
+                    <span class="char-name-main">掃除屋 / 狛井 蓮</span>
+                    <div class="char-attribute"><span class="attr-label">領域:</span>衝動の浄化</div>
+                    <span class="tag-pill">解体業者 ⇄ 狂犬の掃除屋</span>
+                </div>
+                <div class="char-card border-chaos">
+                    <span class="char-role">Chaos 02</span>
+                    <span class="char-name-main">リーダー / 御堂 巳織</span>
+                    <div class="char-attribute"><span class="attr-label">領域:</span>欲望の支配</div>
+                    <span class="tag-pill">モデル ⇄ 虚飾の教祖</span>
+                </div>
+                <div class="char-card border-chaos">
+                    <span class="char-role">Chaos 03</span>
+                    <span class="char-name-main">スパイ / 影山 密</span>
+                    <div class="char-attribute"><span class="attr-label">領域:</span>虚偽の攪乱</div>
+                    <span class="tag-pill">バーテンダー ⇄ 不可視の毒蜂</span>
+                </div>
+                <div class="char-card border-chaos">
+                    <span class="char-role">Chaos 04</span>
+                    <span class="char-name-main">フィクサー / 霧島 凱弦</span>
+                    <div class="char-attribute"><span class="attr-label">領域:</span>権力の掌握</div>
+                    <span class="tag-pill">投資家 ⇄ 運命の天秤</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="faction-section">
+            <h2 class="faction-title faction-flow">Flow <span style="font-size: 1rem; opacity: 0.7;">- 浮遊の風 -</span></h2>
+            <div class="char-grid">
+                <div class="char-card border-flow">
+                    <span class="char-role">Flow 01</span>
+                    <span class="char-name-main">旅人 / 凪原 奏多</span>
+                    <div class="char-attribute"><span class="attr-label">領域:</span>境界の観測</div>
+                    <span class="tag-pill">フリーター ⇄ 境界を歩む者</span>
+                </div>
+                <div class="char-card border-flow">
+                    <span class="char-role">Flow 02</span>
+                    <span class="char-name-main">賢者 / 宇佐見 律</span>
+                    <div class="char-attribute"><span class="attr-label">領域:</span>真理の解読</div>
+                    <span class="tag-pill">大学生 ⇄ 真理の解読者</span>
+                </div>
+                <div class="char-card border-flow">
+                    <span class="char-role">Flow 03</span>
+                    <span class="char-name-main">カラーマスター / 染谷 映</span>
+                    <div class="char-attribute"><span class="attr-label">領域:</span>美意識の調律</div>
+                    <span class="tag-pill">調香師 ⇄ 色彩の調律者</span>
+                </div>
+                <div class="char-card border-flow">
+                    <span class="char-role">Flow 04</span>
+                    <span class="char-name-main">芸術家 / 浅葱 柩</span>
+                    <div class="char-attribute"><span class="attr-label">領域:</span>感性の反逆</div>
+                    <span class="tag-pill">画家 ⇄ 色彩の反逆者</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        &copy; 2024 Altmirror Project / Master Character Attributes
+    </footer>
+
+</body>
+</html>
