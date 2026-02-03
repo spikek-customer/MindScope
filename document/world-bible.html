@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>世界観・設定聖書 | Altmirror 公式IPマスターガイド</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Serif+JP:wght@300;600&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #050505;
+            --panel-dark: #121212;
+            --accent-gold: #d4af37;
+            --accent-blue: #1e3a5f;
+            --text-main: #e0e0e0;
+            --sidebar-width: 280px;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* --- ハンバーガーメニュー (共通) --- */
+        #menu-toggle { display: none; }
+        .hamburger {
+            position: fixed; top: 20px; left: 20px; z-index: 1000;
+            cursor: pointer; background: rgba(0,0,0,0.8);
+            padding: 10px; border: 1px solid var(--accent-gold);
+            border-radius: 5px; transition: 0.3s;
+        }
+        .hamburger span {
+            display: block; width: 25px; height: 2px;
+            background: var(--accent-gold); margin: 5px 0; transition: 0.3s;
+        }
+        .sidebar {
+            position: fixed; top: 0; left: calc(-1 * var(--sidebar-width));
+            width: var(--sidebar-width); height: 100%;
+            background: var(--panel-dark); border-right: 1px solid var(--accent-gold);
+            z-index: 999; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding-top: 80px; overflow-y: auto;
+        }
+        #menu-toggle:checked ~ .sidebar { left: 0; }
+        #menu-toggle:checked ~ .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        #menu-toggle:checked ~ .hamburger span:nth-child(2) { opacity: 0; }
+        #menu-toggle:checked ~ .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .sidebar-menu { list-style: none; padding: 0; margin: 0; }
+        .menu-category {
+            padding: 15px 25px 5px; font-size: 0.8rem; color: var(--accent-gold);
+            text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .sidebar-menu li a {
+            display: block; padding: 12px 25px; color: #bbb; text-decoration: none;
+            transition: 0.3s; font-size: 0.95rem;
+        }
+        .sidebar-menu li a:hover { background: var(--accent-blue); color: #fff; padding-left: 35px; }
+
+        /* --- メインコンテンツ --- */
+        .main-content {
+            padding: 100px 20px 60px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .bible-header {
+            text-align: center;
+            border-bottom: 2px double var(--accent-gold);
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+        }
+
+        .bible-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+            margin: 0;
+            letter-spacing: 0.1em;
+        }
+
+        .section-bible {
+            margin-bottom: 80px;
+        }
+
+        .roman-numeral {
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 2rem;
+            color: var(--accent-gold);
+            margin-top: 0;
+            border-left: 1px solid var(--accent-gold);
+            padding-left: 20px;
+        }
+
+        h3 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.4rem;
+            color: #fff;
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        h3::before {
+            content: "";
+            width: 30px;
+            height: 1px;
+            background: var(--accent-gold);
+            margin-right: 15px;
+        }
+
+        .dualism-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .dualism-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 25px;
+            border-radius: 4px;
+        }
+
+        .dualism-card h4 {
+            font-family: 'Noto Serif JP', serif;
+            color: var(--accent-gold);
+            margin-top: 0;
+            font-size: 1.2rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding-bottom: 10px;
+        }
+
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .matrix-table th, .matrix-table td {
+            border: 1px solid #333;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .matrix-table th {
+            background-color: var(--accent-blue);
+            color: var(--accent-gold);
+            font-family: 'Noto Serif JP', serif;
+        }
+
+        .intent-box {
+            border-left: 3px solid var(--accent-gold);
+            padding-left: 20px;
+            margin: 20px 0;
+            background: rgba(212, 175, 55, 0.05);
+            padding: 20px;
+        }
+
+        .highlight-gold { color: var(--accent-gold); font-weight: bold; }
+
+        @media (max-width: 768px) {
+            .dualism-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="hamburger">
+        <span></span><span></span><span></span>
+    </label>
+
+    <nav class="sidebar">
+        <ul class="sidebar-menu">
+            <li class="menu-category">Concept</li>
+            <li><a href="index.html">TOP / Portal</a></li>
+            <li><a href="concept-bible.html">IP Master Bible</a></li>
+            <li><a href="world-bible.html" style="color:var(--accent-gold)">Setting Bible (The Bible)</a></li>
+            
+            <li class="menu-category">Order (光)</li>
+            <li><a href="doctor.html">医者 / 嵯峨野 匠</a></li>
+            <li><a href="saint.html">聖人 / 十条 祈</a></li>
+            <li><a href="hero.html">英雄 / 烈火 凱</a></li>
+            <li><a href="cleric.html">聖職者 / 観月 零</a></li>
+
+            <li class="menu-category">Chaos (影)</li>
+            <li><a href="cleaner.html">掃除屋 / 狛井 蓮</a></li>
+            <li><a href="cult.html">カルトリーダー / 御堂 巳織</a></li>
+            <li><a href="spy.html">スパイ / 影山 密</a></li>
+            <li><a href="fixer.html">フィクサー / 霧島 凱弦</a></li>
+
+            <li class="menu-category">Flow (中立)</li>
+            <li><a href="color.html">カラーマスター / 染谷 映</a></li>
+            <li><a href="art.html">芸術家 / 浅葱 柩</a></li>
+            <li><a href="sage.html">賢者 / 宇さとみ 律</a></li>
+            <li><a href="road.html">旅人 / 凪原 奏多</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <header class="bible-header">
+            <h1>世界観・設定聖書 (The Bible)</h1>
+        </header>
+
+        <section class="section-bible">
+            <span class="roman-numeral">I</span>
+            <h2>世界観の根幹：二元論 (Dualism)</h2>
+            <p>本作は、<span class="highlight-gold">「Real（現代）」</span> と <span class="highlight-gold">「Another（鏡像世界）」</span>の2つのレイヤーで構成される。これらは互いに影響し合っており、一方の歪みはもう一方の崩壊を招く。</p>
+            
+            <div class="dualism-container">
+                <div class="dualism-card">
+                    <h4>1. 現代世界：鏡の表層</h4>
+                    <p><span class="label">舞台:</span> 20世紀後半〜現代を思わせる大都市。</p>
+                    <p><span class="label">空気感:</span> どこか冷めており、人々は孤独を抱えている。12人の男たちは社会に溶け込み、「善良な市民」を演じている。</p>
+                    <p><span class="label">役割:</span> ユーザーが日常を過ごし、診断の入り口となる場所。</p>
+                </div>
+                <div class="dualism-card">
+                    <h4>2. 鏡像異世界：オルトランド</h4>
+                    <p><span class="label">舞台:</span> ゴシック、スチームパンク、幻想的な魔法が融合した世界。</p>
+                    <p><span class="label">空気感:</span> 常に黄昏時のような空。人々の「深層心理」が風景や怪物となって具現化している。</p>
+                    <p><span class="label">役割:</span> 12人が本来の職能を解放し、ユーザーの「心の毒」を浄化・搾取・観測する場所。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-bible">
+            <span class="roman-numeral">II</span>
+            <h2>12人の守護者：職能別マトリクス</h2>
+            <p>12人は、世界を維持するための「3つの意志」に分かれている。</p>
+
+            <div class="intent-box">
+                <h3 style="margin-top:0;">1. Order (秩序の天秤)</h3>
+                <p>「世界を正しく保つ」ことを目的とする。ユーザーの悩みを「解決」し、「導く」存在。</p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>💉 <span class="highlight-gold">医者 (嵯峨野)</span>: 知的・冷徹な治療</li>
+                    <li>🙏 <span class="highlight-gold">聖人 (十条)</span>: 献身的・重い救済</li>
+                    <li>🔥 <span class="highlight-gold">英雄 (烈火)</span>: 情熱的・自己犠牲</li>
+                    <li>📖 <span class="highlight-gold">聖職者 (観月)</span>: 静謐・運命の記録</li>
+                </ul>
+            </div>
+
+            <div class="intent-box">
+                <h3 style="margin-top:0;">2. Chaos (混沌の奔流)</h3>
+                <p>「世界を動かす」ことを目的とする。ユーザーの欲望を「暴き」、自らの糧にする存在。</p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>🐍 <span class="highlight-gold">教祖 (御堂)</span>: 扇動的・甘美な支配</li>
+                    <li>⛓️ <span class="highlight-gold">掃除屋 (狛井)</span>: 狂暴・破壊的守護</li>
+                    <li>🎭 <span class="highlight-gold">スパイ (影山)</span>: 虚偽・冷酷な密偵</li>
+                    <li>⚖️ <span class="highlight-gold">フィクサー (霧島)</span>: 強欲・絶対的支配</li>
+                </ul>
+            </div>
+
+            <div class="intent-box">
+                <h3 style="margin-top:0;">3. Flow (悠久の風)</h3>
+                <p>「世界を見守る」ことを目的とする。ユーザーの存在を「観測」し、変化を楽しむ存在。</p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>🎨 <span class="highlight-gold">カラーマスター (染谷)</span>: 感覚的・色彩の調律</li>
+                    <li>🖼️ <span class="highlight-gold">芸術家 (浅葱)</span>: 狂気的・創造の爆発</li>
+                    <li>🧩 <span class="highlight-gold">賢者 (宇佐見)</span>: 論理的・真理の解読</li>
+                    <li>🧭 <span class="highlight-gold">旅人 (凪原)</span>: 自由・境界の歩行</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <footer style="text-align: center; padding: 40px; font-size: 0.8rem; color: #666; border-top: 1px solid #222;">
+        &copy; 2024 Altmirror Project / Setting Bible (The Bible)
+    </footer>
+
+</body>
+</html>
