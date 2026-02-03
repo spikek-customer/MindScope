@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用語集 | Altmirror 公式IPマスターガイド</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Serif+JP:wght@300;600&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #050505;
+            --panel-dark: #121212;
+            --accent-gold: #d4af37;
+            --accent-blue: #1e3a5f;
+            --text-main: #e0e0e0;
+            --sidebar-width: 280px;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* --- ハンバーガーメニュー (共通) --- */
+        #menu-toggle { display: none; }
+        .hamburger {
+            position: fixed; top: 20px; left: 20px; z-index: 1000;
+            cursor: pointer; background: rgba(0,0,0,0.8);
+            padding: 10px; border: 1px solid var(--accent-gold);
+            border-radius: 5px; transition: 0.3s;
+        }
+        .hamburger span {
+            display: block; width: 25px; height: 2px;
+            background: var(--accent-gold); margin: 5px 0; transition: 0.3s;
+        }
+        .sidebar {
+            position: fixed; top: 0; left: calc(-1 * var(--sidebar-width));
+            width: var(--sidebar-width); height: 100%;
+            background: var(--panel-dark); border-right: 1px solid var(--accent-gold);
+            z-index: 999; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding-top: 80px; overflow-y: auto;
+        }
+        #menu-toggle:checked ~ .sidebar { left: 0; }
+        #menu-toggle:checked ~ .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        #menu-toggle:checked ~ .hamburger span:nth-child(2) { opacity: 0; }
+        #menu-toggle:checked ~ .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .sidebar-menu { list-style: none; padding: 0; margin: 0; }
+        .menu-category {
+            padding: 15px 25px 5px; font-size: 0.8rem; color: var(--accent-gold);
+            text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .sidebar-menu li a {
+            display: block; padding: 12px 25px; color: #bbb; text-decoration: none;
+            transition: 0.3s; font-size: 0.95rem;
+        }
+        .sidebar-menu li a:hover { background: var(--accent-blue); color: #fff; padding-left: 35px; }
+
+        /* --- メインコンテンツ --- */
+        .main-content {
+            padding: 100px 20px 60px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            border-bottom: 2px double var(--accent-gold);
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+        }
+
+        .page-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+            margin: 0;
+        }
+
+        .glossary-section {
+            margin-bottom: 60px;
+        }
+
+        h2 {
+            font-family: 'Noto Serif JP', serif;
+            color: var(--accent-gold);
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        h2::before {
+            content: "◆";
+            margin-right: 10px;
+            font-size: 1rem;
+        }
+
+        .term-group {
+            margin-bottom: 30px;
+        }
+
+        .term-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 4px solid var(--accent-blue);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+
+        .term-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-left-color: var(--accent-gold);
+        }
+
+        .term-name {
+            font-family: 'Noto Serif JP', serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .term-definition {
+            font-size: 0.95rem;
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+
+        .term-extra {
+            font-size: 0.85rem;
+            color: #888;
+            border-top: 1px solid #333;
+            padding-top: 10px;
+            font-style: italic;
+        }
+
+        .call-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .call-item {
+            background: #000;
+            padding: 10px;
+            border: 1px solid #222;
+            font-size: 0.85rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="hamburger">
+        <span></span><span></span><span></span>
+    </label>
+
+    <nav class="sidebar">
+        <ul class="sidebar-menu">
+            <li class="menu-category">Concept</li>
+            <li><a href="index.html">TOP / Portal</a></li>
+            <li><a href="concept-bible.html">IP Master Bible</a></li>
+            <li><a href="world-bible.html">Setting Bible</a></li>
+            <li><a href="glossary.html" style="color:var(--accent-gold)">Terminology (用語集)</a></li>
+            
+            <li class="menu-category">Order (光)</li>
+            <li><a href="doctor.html">医者 / 嵯峨野 匠</a></li>
+            <li><a href="saint.html">聖人 / 十条 祈</a></li>
+            <li><a href="hero.html">英雄 / 烈火 凱</a></li>
+            <li><a href="cleric.html">聖職者 / 観月 零</a></li>
+
+            <li class="menu-category">Chaos (影)</li>
+            <li><a href="cleaner.html">掃除屋 / 狛井 蓮</a></li>
+            <li><a href="cult.html">カルトリーダー / 御堂 巳織</a></li>
+            <li><a href="spy.html">スパイ / 影山 密</a></li>
+            <li><a href="fixer.html">フィクサー / 霧島 凱弦</a></li>
+
+            <li class="menu-category">Flow (中立)</li>
+            <li><a href="color.html">カラーマスター / 染谷 映</a></li>
+            <li><a href="art.html">芸術家 / 浅葱 柩</a></li>
+            <li><a href="sage.html">賢者 / 宇佐見 律</a></li>
+            <li><a href="road.html">旅人 / 凪原 奏多</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <header class="page-header">
+            <h1>Terminology & World Settings</h1>
+            <p style="font-family: 'Noto Serif JP', serif; letter-spacing: 0.2em; color: #888;">Altmirror 用語集</p>
+        </header>
+
+        <section class="glossary-section">
+            <h2>1. ユーザーの定義と呼称</h2>
+            <div class="term-card">
+                <span class="term-name">鏡子（キョウコ / Speculum）</span>
+                <p class="term-definition">鏡の向こう側（オルトランド）を覗き込み、その情景を現実に引き寄せてしまう資質を持つ者。ユーザー自身の投影であり、この世界において唯一無二の「特異点」として扱われる。</p>
+                <div class="term-extra">
+                    <strong>キャラクターからの主な呼称案:</strong>
+                    <div class="call-list">
+                        <div class="call-item"><span style="color:#d4af37">Order組:</span> 「迷い子」「被験者」「貴女」</div>
+                        <div class="call-item"><span style="color:#ff66ff">Chaos組:</span> 「獲物」「玩具」「お嬢さん」</div>
+                        <div class="call-item"><span style="color:#66ccff">Flow組:</span> 「観測対象」「旅の連れ」「ミューズ」</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="glossary-section">
+            <h2>2. 世界・場所に関する用語</h2>
+            <div class="term-card">
+                <span class="term-name">オルトランド (Alt-Land)</span>
+                <p class="term-definition">現代世界の「鏡の裏側」に広がる精神世界。物理的な距離ではなく「心の深さ」で構成されている。美しくも残酷なゴシック調の風景が特徴。</p>
+            </div>
+            <div class="term-card">
+                <span class="term-name">鏡の回廊 (The Gallery of Mirrors)</span>
+                <p class="term-definition">アプリのホーム画面に相当。現代とオルトランドを繋ぐ中間の場所。12枚の巨大な鏡が並んでおり、ユーザーが触れることで各キャラクターとの対面が始まる。</p>
+            </div>
+            <div class="term-card">
+                <span class="term-name">フラグメント (Fragment)</span>
+                <p class="term-definition">「心の破片」。診断の結果として得られるデータやアイテムの総称。これを集めることでキャラクターの過去エピソードや、異世界での「真名」が解放される。</p>
+            </div>
+        </section>
+
+        <section class="glossary-section">
+            <h2>3. システム・現象に関する用語</h2>
+            <div class="term-card">
+                <span class="term-name">プロファイリング（診断）</span>
+                <p class="term-definition">オルトランドの住人たちが鏡子に対して行う問いかけ。この対話を通じて、鏡子の精神状態や隠れた欲望を浮き彫りにする儀式的なプロセス。</p>
+            </div>
+            <div class="term-card">
+                <span class="term-name">反転（リバース / Reverse）</span>
+                <p class="term-definition">キャラクターが現代の姿から異世界の姿へと変貌する現象。また、ユーザーが自分でも気づかなかった「裏の性格」を突きつけられる瞬間を指すキーワード。</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        &copy; 2024 Altmirror Project / Terminology Guide
+    </footer>
+
+</body>
+</html>
