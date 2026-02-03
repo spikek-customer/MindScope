@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>世界観定義書 | Altmirror 公式IPマスターバイブル</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Serif+JP:wght@300;600&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #050505;
+            --panel-dark: #121212;
+            --accent-gold: #d4af37;
+            --accent-blue: #1e3a5f;
+            --text-main: #e0e0e0;
+            --sidebar-width: 280px;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* --- ハンバーガーメニュー (index.htmlと共通) --- */
+        #menu-toggle { display: none; }
+        .hamburger {
+            position: fixed; top: 20px; left: 20px; z-index: 1000;
+            cursor: pointer; background: rgba(0,0,0,0.8);
+            padding: 10px; border: 1px solid var(--accent-gold);
+            border-radius: 5px; transition: 0.3s;
+        }
+        .hamburger span {
+            display: block; width: 25px; height: 2px;
+            background: var(--accent-gold); margin: 5px 0; transition: 0.3s;
+        }
+        .sidebar {
+            position: fixed; top: 0; left: calc(-1 * var(--sidebar-width));
+            width: var(--sidebar-width); height: 100%;
+            background: var(--panel-dark); border-right: 1px solid var(--accent-gold);
+            z-index: 999; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding-top: 80px; overflow-y: auto;
+        }
+        #menu-toggle:checked ~ .sidebar { left: 0; }
+        #menu-toggle:checked ~ .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        #menu-toggle:checked ~ .hamburger span:nth-child(2) { opacity: 0; }
+        #menu-toggle:checked ~ .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .sidebar-menu { list-style: none; padding: 0; margin: 0; }
+        .menu-category {
+            padding: 15px 25px 5px; font-size: 0.8rem; color: var(--accent-gold);
+            text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .sidebar-menu li a {
+            display: block; padding: 12px 25px; color: #bbb; text-decoration: none;
+            transition: 0.3s; font-size: 0.95rem;
+        }
+        .sidebar-menu li a:hover { background: var(--accent-blue); color: #fff; padding-left: 35px; }
+
+        /* --- メインコンテンツデザイン --- */
+        .main-content {
+            padding: 100px 20px 60px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .bible-header {
+            text-align: center;
+            border-bottom: 2px double var(--accent-gold);
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+        }
+
+        .bible-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+            margin: 0;
+        }
+
+        .bible-header span {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1rem;
+            letter-spacing: 0.3em;
+            color: #888;
+        }
+
+        section {
+            margin-bottom: 60px;
+            background: rgba(255,255,255,0.03);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        h2 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+            border-bottom: 1px solid var(--accent-gold);
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        h3 {
+            font-family: 'Noto Serif JP', serif;
+            color: #fff;
+            border-left: 4px solid var(--accent-blue);
+            padding-left: 15px;
+            margin-top: 30px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .label {
+            font-weight: bold;
+            color: var(--accent-gold);
+        }
+
+        .world-box {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .world-card {
+            flex: 1;
+            background: rgba(0,0,0,0.5);
+            padding: 20px;
+            border: 1px solid #333;
+        }
+
+        .world-card h4 {
+            color: var(--accent-gold);
+            margin-top: 0;
+            text-align: center;
+            border-bottom: 1px solid #444;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            border: 1px solid #444;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--accent-blue);
+            color: #fff;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .world-box { flex-direction: column; }
+            section { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="hamburger">
+        <span></span><span></span><span></span>
+    </label>
+
+    <nav class="sidebar">
+        <ul class="sidebar-menu">
+            <li class="menu-category">Concept</li>
+            <li><a href="index.html">TOP / Portal</a></li>
+            <li><a href="concept-bible.html" style="color:var(--accent-gold)">IP Master Bible</a></li>
+            
+            <li class="menu-category">Order (光)</li>
+            <li><a href="doctor.html">医者 / 嵯峨野 匠</a></li>
+            <li><a href="saint.html">聖人 / 十条 祈</a></li>
+            <li><a href="hero.html">英雄 / 烈火 凱</a></li>
+            <li><a href="cleric.html">聖職者 / 観月 零</a></li>
+
+            <li class="menu-category">Chaos (影)</li>
+            <li><a href="cleaner.html">掃除屋 / 狛井 蓮</a></li>
+            <li><a href="cult.html">カルトリーダー / 御堂 巳織</a></li>
+            <li><a href="spy.html">スパイ / 影山 密</a></li>
+            <li><a href="fixer.html">フィクサー / 霧島 凱弦</a></li>
+
+            <li class="menu-category">Flow (中立)</li>
+            <li><a href="color.html">カラーマスター / 染谷 映</a></li>
+            <li><a href="art.html">芸術家 / 浅葱 柩</a></li>
+            <li><a href="sage.html">賢者 / 宇佐見 律</a></li>
+            <li><a href="road.html">旅人 / 凪原 奏多</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <header class="bible-header">
+            <span>Altmirror Ver. 1.0</span>
+            <h1>IP設計・世界観定義書</h1>
+        </header>
+
+        <section id="project-overview">
+            <h2>1. プロジェクト概要</h2>
+            <div class="info-grid">
+                <div class="label">IP名称</div><div>Altmirror（オルトミラー）</div>
+                <div class="label">コンセプト</div><div>「鏡の向こう側にある、もう一つの人生（運命）」</div>
+                <div class="label">ターゲット</div><div>10代〜30代の女性、2次元ファン、推し活層、腐女子層</div>
+                <div class="label">ジャンル</div><div>深層心理診断 × 異世界ファンタジーIP</div>
+            </div>
+        </section>
+
+        <section id="world-setting">
+            <h2>2. 世界観設定 (The Two Worlds)</h2>
+            <p>本作は、全く異なる2つの世界が「鏡」を通じて表裏一体となっている世界観です。</p>
+            
+            <div class="world-box">
+                <div class="world-card">
+                    <h4>【Real: 現代世界】</h4>
+                    <p>舞台：20世紀（現在）の都会。</p>
+                    <p>12人の男たちは、アンティークショップの店員、医者、学生など、それぞれの「表の顔」を持って平穏に暮らしている。</p>
+                </div>
+                <div class="world-card">
+                    <h4>【Another: 鏡像異世界】</h4>
+                    <p>舞台：剣と魔法、ゴシックファンタジー世界。</p>
+                    <p>現代人の「心の歪み」が限界に達したとき、この世界に影響を及ぼす。12人は「裏の職能（ジョブ）」を解放し、世界の均衡を保つために戦う。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="character-structure">
+            <h2>3. キャラクター構成 (12 Gentlemen)</h2>
+            <p>12名は全員が主人公であり、ユーザーの導き手です。3つのグループに分かれつつも、個々の深い因縁を持ちます。</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>グループ</th>
+                        <th>担当役割（裏稼業）</th>
+                        <th>現代の職業（例）</th>
+                        <th>性格・口調</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="color:#ffcc00;">Order (光)</td>
+                        <td>聖人、医者、英雄、聖職者</td>
+                        <td>慈善家、外科医、警官、司書</td>
+                        <td>秩序、献身、規律、敬語</td>
+                    </tr>
+                    <tr>
+                        <td style="color:#ff66ff;">Chaos (影)</td>
+                        <td>教祖、掃除屋、スパイ、フィクサー</td>
+                        <td>トップモデル、清掃員、バーテンダー、投資家</td>
+                        <td>支配、本能、策略、俺様・粗野</td>
+                    </tr>
+                    <tr>
+                        <td style="color:#66ccff;">Flow (中立)</td>
+                        <td>カラーマスター、芸術家、賢者、旅人</td>
+                        <td>調香師、画家、大学生、フリーター</td>
+                        <td>中立、芸術、知、飄々・マイペース</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="core-system">
+            <h2>4. コアシステム（反転：リバース）</h2>
+            <h3>鏡の問いかけ</h3>
+            <p>ユーザー（鏡子）が診断テストを受ける際、キャラクターたちが鏡の中から語りかけます。「表の顔」で見せる優しさと、「裏の顔」で突きつける真実のギャップが、本作最大の魅力です。</p>
+            
+            <h3>深層心理との連動</h3>
+            <p>診断結果により、ユーザーがどのグループ（Order, Chaos, Flow）に属するか、どのキャラクターが「運命のパートナー」かが決定されます。</p>
+        </section>
+    </div>
+
+    <footer>
+        &copy; 2024 Altmirror Project / World Building Document
+    </footer>
+
+</body>
+</html>
