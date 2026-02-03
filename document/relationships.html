@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>キャラクター関係性 | Altmirror 公式IPマスターガイド</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Serif+JP:wght@300;600&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #050505;
+            --panel-dark: #121212;
+            --accent-gold: #d4af37;
+            --accent-blue: #1e3a5f;
+            --accent-red: #8b0000;
+            --text-main: #e0e0e0;
+            --sidebar-width: 280px;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* --- ハンバーガーメニュー (共通) --- */
+        #menu-toggle { display: none; }
+        .hamburger {
+            position: fixed; top: 20px; left: 20px; z-index: 1000;
+            cursor: pointer; background: rgba(0,0,0,0.8);
+            padding: 10px; border: 1px solid var(--accent-gold);
+            border-radius: 5px; transition: 0.3s;
+        }
+        .hamburger span {
+            display: block; width: 25px; height: 2px;
+            background: var(--accent-gold); margin: 5px 0; transition: 0.3s;
+        }
+        .sidebar {
+            position: fixed; top: 0; left: calc(-1 * var(--sidebar-width));
+            width: var(--sidebar-width); height: 100%;
+            background: var(--panel-dark); border-right: 1px solid var(--accent-gold);
+            z-index: 999; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding-top: 80px; overflow-y: auto;
+        }
+        #menu-toggle:checked ~ .sidebar { left: 0; }
+        #menu-toggle:checked ~ .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        #menu-toggle:checked ~ .hamburger span:nth-child(2) { opacity: 0; }
+        #menu-toggle:checked ~ .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .sidebar-menu { list-style: none; padding: 0; margin: 0; }
+        .menu-category {
+            padding: 15px 25px 5px; font-size: 0.8rem; color: var(--accent-gold);
+            text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .sidebar-menu li a {
+            display: block; padding: 12px 25px; color: #bbb; text-decoration: none;
+            transition: 0.3s; font-size: 0.95rem;
+        }
+        .sidebar-menu li a:hover { background: var(--accent-blue); color: #fff; padding-left: 35px; }
+
+        /* --- メインコンテンツ --- */
+        .main-content {
+            padding: 100px 20px 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            border-bottom: 2px double var(--accent-gold);
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+        }
+
+        .page-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+            margin: 0;
+        }
+
+        .relation-card {
+            background: var(--panel-dark);
+            border: 1px solid #333;
+            margin-bottom: 40px;
+            padding: 30px;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .relation-card::before {
+            content: "RELATIONSHIP";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-family: 'Cinzel', serif;
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.03);
+            font-weight: bold;
+            pointer-events: none;
+        }
+
+        .pair-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            font-family: 'Noto Serif JP', serif;
+        }
+
+        .char-name {
+            font-size: 1.4rem;
+            color: #fff;
+            border-bottom: 2px solid var(--accent-gold);
+            padding: 0 10px;
+        }
+
+        .vs-badge {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--accent-red);
+            font-weight: bold;
+        }
+
+        .relation-tag {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .dialogue-box {
+            background: rgba(0,0,0,0.4);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 2px solid var(--accent-blue);
+        }
+
+        .line {
+            margin-bottom: 15px;
+        }
+
+        .speaker {
+            font-weight: bold;
+            color: var(--accent-gold);
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.85rem;
+        }
+
+        .text {
+            font-style: italic;
+            padding-left: 10px;
+        }
+
+        .inner-setting {
+            font-size: 0.9rem;
+            color: #aaa;
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-top: 1px dashed #444;
+        }
+
+        .inner-setting strong {
+            color: var(--accent-gold);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="hamburger">
+        <span></span><span></span><span></span>
+    </label>
+
+    <nav class="sidebar">
+        <ul class="sidebar-menu">
+            <li class="menu-category">Concept</li>
+            <li><a href="index.html">TOP / Portal</a></li>
+            <li><a href="concept-bible.html">IP Master Bible</a></li>
+            <li><a href="world-bible.html">Setting Bible</a></li>
+            <li><a href="glossary.html">Terminology</a></li>
+            <li><a href="relationships.html" style="color:var(--accent-gold)">Relationships (関係性)</a></li>
+            
+            <li class="menu-category">Order (光)</li>
+            <li><a href="doctor.html">医者 / 嵯峨野 匠</a></li>
+            <li><a href="saint.html">聖人 / 十条 祈</a></li>
+            <li><a href="hero.html">英雄 / 烈火 凱</a></li>
+            <li><a href="cleric.html">聖職者 / 観月 零</a></li>
+
+            <li class="menu-category">Chaos (影)</li>
+            <li><a href="cleaner.html">掃除屋 / 狛井 蓮</a></li>
+            <li><a href="cult.html">カルトリーダー / 御堂 巳織</a></li>
+            <li><a href="spy.html">スパイ / 影山 密</a></li>
+            <li><a href="fixer.html">フィクサー / 霧島 凱弦</a></li>
+
+            <li class="menu-category">Flow (中立)</li>
+            <li><a href="color.html">カラーマスター / 染谷 映</a></li>
+            <li><a href="art.html">芸術家 / 浅葱 柩</a></li>
+            <li><a href="sage.html">賢者 / 宇佐見 律</a></li>
+            <li><a href="road.html">旅人 / 凪原 奏多</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <header class="page-header">
+            <h1>Relationship & Episodes</h1>
+            <p style="font-family: 'Noto Serif JP', serif; letter-spacing: 0.1em; color: #888;">キャラクター関係性・掛け合いバイブル</p>
+        </header>
+
+        <div class="relation-card">
+            <div class="pair-title">
+                <span class="char-name">医者（嵯峨野）</span>
+                <span class="vs-badge">VS</span>
+                <span class="char-name">英雄（烈火）</span>
+            </div>
+            <div class="relation-tag">【氷の理屈 vs 炎の感情】宿命的な犬猿の仲</div>
+            
+            <div class="dialogue-box">
+                <div class="line">
+                    <span class="speaker">烈火：</span>
+                    <span class="text">「おい嵯峨野！ さっさとこの人を診ろ！ 命を救うのが医者の仕事だろうが！」</span>
+                </div>
+                <div class="line">
+                    <span class="speaker">嵯峨野：</span>
+                    <span class="text">「五月蝿いな……。私は『救える命』にしか興味がないと言っている。どきなさい、その男の出血で私の白衣が汚れる。」</span>
+                </div>
+            </div>
+            <div class="inner-setting">
+                <strong>裏の顔（異世界）：</strong> 戦闘時、瀕死の烈火を嵯峨野が「魂の再構成」で無理やり立たせ、「君が死ぬのは私の計算の外だ。勝手にリタイアするな」と、冷酷なまでに執着する一面も。
+            </div>
+        </div>
+
+        <div class="relation-card">
+            <div class="pair-title">
+                <span class="char-name">聖人（十条）</span>
+                <span class="vs-badge">×</span>
+                <span class="char-name">カルトリーダー（御堂）</span>
+            </div>
+            <div class="relation-tag">【救済の毒 vs 支配の蜜】鏡合わせの光と影の教祖</div>
+            
+            <div class="dialogue-box">
+                <div class="line">
+                    <span class="speaker">御堂：</span>
+                    <span class="text">「十条、お前のその『聖者ごっこ』には吐き気がするよ。無償の愛？ 結局は自分に酔っているだけじゃないか。」</span>
+                </div>
+                <div class="line">
+                    <span class="speaker">十条：</span>
+                    <span class="text">「……そう見えるのなら、悲しいですね。ですが御堂さん、貴方の支配もまた、孤独の裏返しに過ぎない。救いが必要なのは……貴方の方だ。」</span>
+                </div>
+            </div>
+            <div class="inner-setting">
+                <strong>裏の顔（異世界）：</strong> 互いに「信者（リソース）」を奪い合うライバル。しかし、強大な敵を前にした際は「狂信」と「絶望」を織り交ぜた、最悪かつ最強の精神汚染コンビとなる。
+            </div>
+        </div>
+
+        <div class="relation-card">
+            <div class="pair-title">
+                <span class="char-name">掃除屋（狛井）</span>
+                <span class="vs-badge">VS</span>
+                <span class="char-name">カラーマスター（染谷）</span>
+            </div>
+            <div class="relation-tag">【掃除の美学：破壊 vs 調整】生理的な不快と感覚的な調和</div>
+            
+            <div class="dialogue-box">
+                <div class="line">
+                    <span class="speaker">染谷：</span>
+                    <span class="text">「近寄らないで。君の放つ『鉄錆と死の臭い』は、私の最高傑作（香水）を台無しにする。」</span>
+                </div>
+                <div class="line">
+                    <span class="speaker">狛井：</span>
+                    <span class="text">「……あぁ？ だったらその、頭が痛くなるような花の匂いを消してやろうか。……この鎌で、根元からな。」</span>
+                </div>
+            </div>
+            <div class="inner-setting">
+                <strong>裏の顔（異世界）：</strong> 染谷が香りで敵の感覚を麻痺させ、そこを狛井が容赦なく狩る。不仲ながらも、効率のみで繋がった「機能的な残酷コンビ」。
+            </div>
+        </div>
+
+        <div class="relation-card">
+            <div class="pair-title">
+                <span class="char-name">フィクサー（霧島）</span>
+                <span class="vs-badge">×</span>
+                <span class="char-name">賢者（宇佐見）</span>
+            </div>
+            <div class="relation-tag">【世界の勝者：金権 vs 知識】搾取する大人と見透かす子供</div>
+            
+            <div class="dialogue-box">
+                <div class="line">
+                    <span class="speaker">霧島：</span>
+                    <span class="text">「宇佐見君、君のその頭脳に投資したい。対価は望むままだ。……私のチェスの駒になる気はないかね？」</span>
+                </div>
+                <div class="line">
+                    <span class="speaker">宇佐見：</span>
+                    <span class="text">「お断りです。おじさんの強欲に付き合うほど、僕は暇じゃない。……それに、貴方の次の『損失』はもう計算済みですよ。」</span>
+                </div>
+            </div>
+            <div class="inner-setting">
+                <strong>裏の顔（異世界）：</strong> 霧島が戦場の「場」を支配し、宇佐見が「解」を導き出す。霧島は宇佐見の知性を高く評価しており、宇佐見は霧島の資金力を「効率的なツール」として利用する共依存関係。
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 Altmirror Project / Relationship Bible
+    </footer>
+
+</body>
+</html>
