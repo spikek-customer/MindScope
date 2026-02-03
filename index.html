@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Altmirror | 公式IPマスターガイド</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Serif+JP:wght@300;600&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #050505;
+            --panel-dark: #121212;
+            --accent-gold: #d4af37;
+            --accent-blue: #1e3a5f;
+            --text-main: #e0e0e0;
+            --sidebar-width: 280px;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Noto Sans JP', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- ハンバーガーメニュー --- */
+        #menu-toggle {
+            display: none;
+        }
+
+        .hamburger {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            cursor: pointer;
+            background: rgba(0,0,0,0.7);
+            padding: 10px;
+            border: 1px solid var(--accent-gold);
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: var(--accent-gold);
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+
+        /* サイドバー */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: calc(-1 * var(--sidebar-width));
+            width: var(--sidebar-width);
+            height: 100%;
+            background: var(--panel-dark);
+            border-right: 1px solid var(--accent-gold);
+            z-index: 999;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding-top: 80px;
+            overflow-y: auto;
+        }
+
+        #menu-toggle:checked ~ .sidebar {
+            left: 0;
+        }
+
+        #menu-toggle:checked ~ .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        #menu-toggle:checked ~ .hamburger span:nth-child(2) { opacity: 0; }
+        #menu-toggle:checked ~ .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu-category {
+            padding: 15px 25px 5px;
+            font-size: 0.8rem;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .sidebar-menu li a {
+            display: block;
+            padding: 12px 25px;
+            color: #bbb;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .sidebar-menu li a:hover {
+            background: var(--accent-blue);
+            color: #fff;
+            padding-left: 35px;
+        }
+
+        /* --- メインコンテンツ --- */
+        .main-content {
+            padding: 60px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            transition: margin-left 0.4s;
+        }
+
+        header.hero {
+            text-align: center;
+            padding: 100px 0 60px;
+            background: radial-gradient(circle, #1e3a5f 0%, #050505 70%);
+            border-bottom: 1px solid var(--accent-gold);
+            margin-bottom: 50px;
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            color: var(--accent-gold);
+            margin: 0;
+            letter-spacing: 8px;
+        }
+
+        .hero p {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.2rem;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .section-card {
+            background: var(--panel-dark);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .section-card h2 {
+            font-family: 'Noto Serif JP', serif;
+            border-left: 4px solid var(--accent-gold);
+            padding-left: 15px;
+            color: var(--accent-gold);
+            margin-top: 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .group-box {
+            border: 1px solid #333;
+            padding: 20px;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .group-box h3 {
+            color: var(--accent-gold);
+            margin-top: 0;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.8rem;
+            color: #666;
+            border-top: 1px solid #222;
+        }
+
+        /* スマホ対応 */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .sidebar { width: 100%; left: -100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </label>
+
+    <nav class="sidebar">
+        <ul class="sidebar-menu">
+            <li class="menu-category">Main Navigation</li>
+            <li><a href="#overview">Project Overview</a></li>
+            <li><a href="#world">World Setting</a></li>
+            
+            <li class="menu-category">Order (光)</li>
+            <li><a href="doctor.html">医者 / 嵯峨野 匠</a></li>
+            <li><a href="saint.html">聖人 / 十条 祈</a></li>
+            <li><a href="hero.html">英雄 / 烈火 凱</a></li>
+            <li><a href="cleric.html">聖職者 / 観月 零</a></li>
+
+            <li class="menu-category">Chaos (影)</li>
+            <li><a href="cleaner.html">掃除屋 / 狛井 蓮</a></li>
+            <li><a href="cult.html">カルトリーダー / 御堂 巳織</a></li>
+            <li><a href="spy.html">スパイ / 影山 密</a></li>
+            <li><a href="fixer.html">フィクサー / 霧島 凱弦</a></li>
+
+            <li class="menu-category">Flow (中立)</li>
+            <li><a href="color.html">カラーマスター / 染谷 映</a></li>
+            <li><a href="art.html">芸術家 / 浅葱 柩</a></li>
+            <li><a href="sage.html">賢者 / 宇佐見 律</a></li>
+            <li><a href="road.html">旅人 / 凪原 奏多</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <header class="hero">
+            <h1>Altmirror</h1>
+            <p>「鏡を覗けば、嘘が剥がれる。」</p>
+        </header>
+
+        <section id="overview" class="section-card">
+            <h2>プロジェクト概要</h2>
+            <p><strong>コンセプト：</strong>「鏡の向こう側にある、もう一つの人生（運命）」</p>
+            <p><strong>ジャンル：</strong>深層心理診断 × ダークファンタジーADV</p>
+            <p>ユーザーは「鏡子（キョウコ）」として、鏡の回廊に並ぶ12人の使徒（アポストル）の問いに答え、自身の深層心理を紐解いていくことになります。</p>
+        </section>
+
+        <section id="world" class="section-card">
+            <h2>世界観設定</h2>
+            <div class="grid">
+                <div class="group-box">
+                    <h3>【Real】現代世界</h3>
+                    <p>舞台は20世紀の都会。12人の男たちは、アンティークショップの店員、医者、学生など、それぞれの「表の顔」を持って平穏に暮らしている。</p>
+                </div>
+                <div class="group-box">
+                    <h3>【Another】鏡像異世界</h3>
+                    <p>鏡の裏側、剣と魔法がうごめくゴシックファンタジー世界。現代人の心の歪みが限界に達したとき、彼らは「裏の職能」を解放する。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="characters" class="section-card">
+            <h2>12人の使徒（使徒リスト）</h2>
+            <p>3つのグループに分かれた12人の使徒。各リンクから詳細なキャラクタープロファイルをご覧いただけます。</p>
+            <div class="grid">
+                <div class="group-box">
+                    <h3>Order：秩序の天秤</h3>
+                    <p style="font-size: 0.9rem;">救済と調和を司る。秩序、献身、規律を重んじるグループ。</p>
+                </div>
+                <div class="group-box">
+                    <h3>Chaos：混沌の奔流</h3>
+                    <p style="font-size: 0.9rem;">支配と変革を司る。欲望、破壊、実利を求めるグループ。</p>
+                </div>
+                <div class="group-box">
+                    <h3>Flow：悠久の風</h3>
+                    <p style="font-size: 0.9rem;">観察と流動を司る。中立、芸術、知を追求するグループ。</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        &copy; 2024 Altmirror Project. All Rights Reserved.
+    </footer>
+
+</body>
+</html>
