@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Altmirror 公式IPマスターガイド | TOP</title>
+    <title>Altmirror 公式IPマスターガイド | Portal</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Serif+JP:wght@300;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -23,7 +23,7 @@
             overflow-x: hidden;
         }
 
-        /* --- ハンバーガーメニュー共通スタイル --- */
+        /* --- ハンバーガーメニュー (修正済みディレクトリ対応) --- */
         #menu-toggle { display: none; }
         .hamburger {
             position: fixed; top: 20px; left: 20px; z-index: 1000;
@@ -33,7 +33,7 @@
         }
         .hamburger span {
             display: block; width: 25px; height: 2px;
-            background: var(--accent-gold); margin: 5px 0; transition: 0.3s;
+            background: var(--accent-gold); margin: 5px 0;
         }
         .sidebar {
             position: fixed; top: 0; left: calc(-1 * var(--sidebar-width));
@@ -43,9 +43,6 @@
             padding-top: 80px; overflow-y: auto;
         }
         #menu-toggle:checked ~ .sidebar { left: 0; }
-        #menu-toggle:checked ~ .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-        #menu-toggle:checked ~ .hamburger span:nth-child(2) { opacity: 0; }
-        #menu-toggle:checked ~ .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
         .sidebar-menu { list-style: none; padding: 0; margin: 0; }
         .menu-category {
@@ -56,62 +53,91 @@
             display: block; padding: 12px 25px; color: #bbb; text-decoration: none;
             transition: 0.3s; font-size: 0.9rem;
         }
-        .sidebar-menu li a:hover { background: var(--accent-blue); color: #fff; padding-left: 35px; }
+        .sidebar-menu li a:hover { background: var(--accent-blue); color: #fff; }
 
         /* --- メインビジュアル --- */
         .hero {
-            height: 100vh;
+            min-height: 80vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: radial-gradient(circle, #1a1a1a 0%, #050505 100%);
-            padding: 0 20px;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
+            padding: 100px 20px;
         }
 
         .hero h1 {
             font-family: 'Cinzel', serif;
-            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-size: clamp(2.5rem, 10vw, 5rem);
             color: var(--accent-gold);
             margin: 0;
-            letter-spacing: 0.2em;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: #888;
-            margin-top: 20px;
             letter-spacing: 0.3em;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
         }
 
+        .hero .catchphrase {
+            font-size: 1.4rem;
+            color: #ccc;
+            margin: 20px 0;
+            letter-spacing: 0.5em;
+            font-weight: 300;
+        }
+
+        .hero .summary {
+            max-width: 700px;
+            color: #888;
+            font-size: 0.95rem;
+            line-height: 2;
+            margin-bottom: 50px;
+        }
+
+        /* --- グリッドレイアウト --- */
         .portal-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            max-width: 1000px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1100px;
             width: 100%;
-            margin-top: 50px;
+            margin: 0 auto 100px;
+            padding: 0 20px;
         }
 
         .portal-card {
             border: 1px solid #333;
-            padding: 30px;
+            padding: 40px;
             background: rgba(255, 255, 255, 0.02);
             text-decoration: none;
             color: inherit;
-            transition: 0.3s;
-            text-align: left;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portal-card::before {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--accent-gold); transform: scaleX(0); transition: 0.4s;
         }
 
         .portal-card:hover {
             border-color: var(--accent-gold);
             background: rgba(212, 175, 55, 0.05);
+            transform: translateY(-5px);
         }
 
-        .card-label { color: var(--accent-gold); font-size: 0.8rem; display: block; margin-bottom: 10px; }
-        .card-title { font-size: 1.4rem; display: block; }
+        .portal-card:hover::before { transform: scaleX(1); }
+
+        .card-label { color: var(--accent-gold); font-size: 0.75rem; letter-spacing: 0.2em; display: block; margin-bottom: 15px; }
+        .card-title { font-size: 1.6rem; font-family: 'Cinzel', serif; display: block; margin-bottom: 10px; }
+        .card-text { font-size: 0.85rem; color: #888; line-height: 1.6; }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            border-top: 1px solid #222;
+            color: #555;
+            font-size: 0.8rem;
+        }
     </style>
 </head>
 <body>
@@ -125,56 +151,69 @@
         <ul class="sidebar-menu">
             <li class="menu-category">Main Bible</li>
             <li><a href="index.html" style="color:var(--accent-gold)">TOP / Portal</a></li>
-            <li><a href="concept-bible.html">IP Master Bible</a></li>
-            <li><a href="world-bible.html">Setting Bible</a></li>
-            <li><a href="glossary.html">Terminology (用語集)</a></li>
-            <li><a href="characters.html">Characters (属性一覧)</a></li>
-            <li><a href="relationships.html">Relationships (関係性)</a></li>
-            <li><a href="uiux-design.html">UI/UX Design (仕様書)</a></li>
+            <li><a href="document/concept-bible.html">IP Master Bible</a></li>
+            <li><a href="document/world-bible.html">Setting Bible</a></li>
+            <li><a href="document/glossary.html">Terminology</a></li>
+            <li><a href="characters/characters.html">Character Matrix</a></li>
+            <li><a href="document/relationships.html">Relationships</a></li>
+            <li><a href="document/uiux-design.html">UI/UX Design</a></li>
             
-            <li class="menu-category">Order (秩序)</li>
-            <li><a href="doctor.html">医者 / 嵯峨野 匠</a></li>
-            <li><a href="saint.html">聖人 / 十条 祈</a></li>
-            <li><a href="hero.html">英雄 / 烈火 凱</a></li>
-            <li><a href="cleric.html">聖職者 / 観月 零</a></li>
+            <li class="menu-category">Order</li>
+            <li><a href="characters/doctor.html">医者 / 嵯峨野 匠</a></li>
+            <li><a href="characters/saint.html">聖人 / 十条 祈</a></li>
+            <li><a href="characters/hero.html">英雄 / 烈火 凱</a></li>
+            <li><a href="characters/cleric.html">聖職者 / 観月 零</a></li>
 
-            <li class="menu-category">Chaos (混沌)</li>
-            <li><a href="cleaner.html">掃除屋 / 狛井 蓮</a></li>
-            <li><a href="cult.html">教祖 / 御堂 巳織</a></li>
-            <li><a href="spy.html">スパイ / 影山 密</a></li>
-            <li><a href="fixer.html">フィクサー / 霧島 凱弦</a></li>
+            <li class="menu-category">Chaos</li>
+            <li><a href="characters/cleaner.html">掃除屋 / 狛井 蓮</a></li>
+            <li><a href="characters/cult.html">教祖 / 御堂 巳織</a></li>
+            <li><a href="characters/spy.html">スパイ / 影山 密</a></li>
+            <li><a href="characters/fixer.html">フィクサー / 霧島 凱弦</a></li>
 
-            <li class="menu-category">Flow (浮遊)</li>
-            <li><a href="road.html">旅人 / 凪原 奏多</a></li>
-            <li><a href="sage.html">賢者 / 宇佐見 律</a></li>
-            <li><a href="color.html">カラーマスター / 染谷 映</a></li>
-            <li><a href="art.html">芸術家 / 浅葱 柩</a></li>
+            <li class="menu-category">Flow</li>
+            <li><a href="characters/road.html">旅人 / 凪原 奏多</a></li>
+            <li><a href="characters/sage.html">賢者 / 宇佐見 律</a></li>
+            <li><a href="characters/color.html">カラーマスター / 染谷 映</a></li>
+            <li><a href="characters/art.html">芸術家 / 浅葱 柩</a></li>
         </ul>
     </nav>
 
     <div class="hero">
         <h1>ALTMIRROR</h1>
-        <p>鏡を覗けば、嘘が剥がれる。</p>
+        <p class="catchphrase">鏡を覗けば、嘘が剥がれる。</p>
+        <p class="summary">
+            現代の「Real」と、鏡の裏の「Another（オルトランド）」の二重構造。<br>
+            ユーザーは「鏡子（キョウコ）」として、12人の「使徒」の問いに答え、<br>
+            彼らの反転を目撃しながら、自身の深層心理を紐解いていく。
+        </p>
 
         <div class="portal-grid">
-            <a href="concept-bible.html" class="portal-card">
+            <a href="document/concept-bible.html" class="portal-card">
                 <span class="card-label">01. PROJECT</span>
                 <span class="card-title">IP Master Bible</span>
+                <p class="card-text">『Altmirror』の企画概要、ターゲット層、およびプロジェクトの設計指針。</p>
             </a>
-            <a href="world-bible.html" class="portal-card">
+            <a href="document/world-bible.html" class="portal-card">
                 <span class="card-label">02. WORLD</span>
                 <span class="card-title">Setting Bible</span>
+                <p class="card-text">現代世界と鏡像異世界「オルトランド」の二元論設定と世界観ガイド。</p>
             </a>
-            <a href="characters.html" class="portal-card">
+            <a href="characters/characters.html" class="portal-card">
                 <span class="card-label">03. ARCHIVE</span>
                 <span class="card-title">Character Matrix</span>
+                <p class="card-text">3つの意志（Order/Chaos/Flow）に属する12名の使徒たちの属性・二面性一覧。</p>
             </a>
-            <a href="uiux-design.html" class="portal-card">
+            <a href="document/uiux-design.html" class="portal-card">
                 <span class="card-label">04. VISUAL</span>
                 <span class="card-title">UI/UX Design</span>
+                <p class="card-text">「反転する美学」をコンセプトとした、アプリ画面の演出および体験設計。</p>
             </a>
         </div>
     </div>
+
+    <footer>
+        &copy; 2024 Altmirror Project / IP Master Bible All Rights Reserved.
+    </footer>
 
 </body>
 </html>
